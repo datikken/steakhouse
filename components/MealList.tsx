@@ -5,15 +5,15 @@ import MealItem from '../components/MealItem';
 const MealList = ({displayed, navigation}) => {
     const renderMealItem = ({item}) => {
         return <MealItem
-            image={item.imageUrl}
-            affordability={item.affordability}
-            complexity={item.complexity}
-            duration={item.duration}
-            title={item.title}
-            onSelectMeal={() => {
-                navigation.navigate({routeName: 'MealDetail', params: {
-                        mealId: item.id
-                    } })
+                    image={item.imageUrl}
+                    affordability={item.affordability}
+                    complexity={item.complexity}
+                    duration={item.duration}
+                    title={item.title}
+                    onSelectMeal={() => {
+                        navigation.navigate({routeName: 'MealDetail', params: {
+                                mealId: item.id
+                            } })
             }} />
     }
     return (
