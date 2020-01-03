@@ -11,6 +11,7 @@ import MealDetailScreen from "../screens/MealDetailScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import colors from "../constants/colors";
 
+//настройки по умолчанию
 const defaultOpts = {
     defaultNavigationOptions: {
         headerTitle: 'Steakhouse',
@@ -24,7 +25,12 @@ const defaultOpts = {
             fontSize: 30
         }
     }};
-
+//экраны из фаворитов
+const FavouritesNavigator = createStackNavigator({
+    Favourites: FavouritesScreen,
+    MealDetail: MealDetailScreen
+},defaultOpts);
+//основная навигация
 const MealsNavigator = createStackNavigator(
     {
         Categories: {
@@ -34,10 +40,8 @@ const MealsNavigator = createStackNavigator(
             screen: CategoryMealsScreen
         },
         MealDetail: MealDetailScreen
-    },
-    defaultOpts
-);
-
+    },defaultOpts);
+//обьединение настроек и путей
 const tabScreenConfig = {
     Meals: {
         screen: MealsNavigator,
@@ -51,16 +55,16 @@ const tabScreenConfig = {
         }
     },
     Favorites: {
-        screen: FavouritesScreen,
+        screen: FavouritesNavigator,
         navigationOptions: {
             tabBarIcon: tabInfo => {
-                return <Ionicons name="ios-star" size={25} color={tabInfo.tintColor} />;
+                return <Ionicons name="ios-heart-empty" size={25} color={tabInfo.tintColor} />;
             },
             tabBarColor: colors.accentColor
         }
     }
 };
-
+//навигция под большим пальцем
 const MealsFavTabNavigator =
     Platform.OS === 'android'
         ? createMaterialBottomTabNavigator(tabScreenConfig, {
