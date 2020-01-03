@@ -84,11 +84,11 @@ const MealsFavTabNavigator =
 //путь для фильтров
 const FilterNavigator = createStackNavigator({
     screen: FiltersScreen
-});
+}, defaultOpts);
 
 //боковое меню
 const MainNavigator = createDrawerNavigator({
-  MealsFav: MealsFavTabNavigator,
+  Favourites: MealsFavTabNavigator,
   Filters: FilterNavigator
 });
 
