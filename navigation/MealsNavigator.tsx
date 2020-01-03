@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Platform } from 'react-native';
@@ -9,6 +10,7 @@ import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
 import MealDetailScreen from "../screens/MealDetailScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
+import FiltersScreen from '../screens/FiltersScreen';
 import colors from "../constants/colors";
 
 //настройки по умолчанию
@@ -79,5 +81,15 @@ const MealsFavTabNavigator =
                 activeTintColor: colors.accentColor
             }
         });
+//путь для фильтров
+const FilterNavigator = createStackNavigator({
+    screen: FiltersScreen
+});
 
-export default createAppContainer(MealsFavTabNavigator);
+//боковое меню
+const MainNavigator = createDrawerNavigator({
+  MealsFav: MealsFavTabNavigator,
+  Filters: FilterNavigator
+});
+
+export default createAppContainer(MainNavigator);
