@@ -9,18 +9,10 @@ import MealDetailScreen from "../screens/MealDetailScreen";
 import FavouritesScreen from "../screens/FavouritesScreen";
 import colors from "../constants/colors";
 
-const MealsNavigator = createStackNavigator({
-  Categories: {
-      screen: CategoriesScreen
-  },
-  CategoryMeals: {
-      screen: CategoryMealsScreen
-  },
-  MealDetail: MealDetailScreen
-}, {
+const defaultOpts = {
     defaultNavigationOptions: {
         headerTitle: 'Steakhouse',
-        headerBackTitle: null,
+        headerBackTitle: '',
         headerStyle: {
             backgroundColor: colors.primaryColor
         },
@@ -29,30 +21,40 @@ const MealsNavigator = createStackNavigator({
             fontFamily: 'meat',
             fontSize: 30
         }
-    } });
+    }};
+
+const MealsNavigator = createStackNavigator({
+    Categories: {
+        screen: CategoriesScreen
+    },
+    CategoryMeals: {
+        screen: CategoryMealsScreen
+    },
+    MealDetail: MealDetailScreen
+}, defaultOpts);
 
 const MealsFavTabNavigator = createBottomTabNavigator({
-    Meals: {screen: MealsNavigator, navigationOptions: {
-            tabBarIcon: (info) => {
-                return <Ionicons
+        Meals: {screen: MealsNavigator, navigationOptions: {
+                tabBarIcon: (info:{focused: boolean, horizontal:boolean, tintColor:string}) => {
+                    return <Ionicons
                         color={info.tintColor}
                         size={25}
                         name="ios-restaurant" />
+                }
+            }},
+        Favorites: {screen: FavouritesScreen, navigationOptions:{
+                tabBarIcon: (info) => {
+                    return <Ionicons
+                        color={info.tintColor}
+                        size={25}
+                        name="ios-heart-empty" />
+                }
             }
-        }},
-    Favorites: {screen: FavouritesScreen, navigationOptions:{
-            tabBarIcon: (info) => {
-                return <Ionicons
-                    color={info.tintColor}
-                    size={25}
-                    name="ios-heart-empty" />
-            }
+        }}
+    , {
+        tabBarOptions: {
+            activeTintColor: colors.accentColor
         }
-    }}
-, {
-    tabBarOptions: {
-        activeTintColor: colors.accentColor
-    }
-});
+    });
 
 export default createAppContainer(MealsFavTabNavigator);

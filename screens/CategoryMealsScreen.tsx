@@ -42,7 +42,7 @@ CategoryMeals.navigationOptions = (navigationData) => {
     const selectedCat = CATEGORIES.find(cat => cat.id === catId)
 
     return {
-        headerTitle: selectedCat.title,
+        headerTitle: selectedCat ? selectedCat.title : 'title',
         headerStyle: {
             backgroundColor: colors.primaryColor
         },

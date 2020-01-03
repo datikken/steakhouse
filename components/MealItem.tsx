@@ -7,7 +7,8 @@ import {
     ImageBackground
 } from 'react-native';
 
-const MealItem = ({onSelectMeal, title, duration, complexity, affordability, image}) => {
+const MealItem = ({onSelectMeal, title, duration, complexity, affordability, image}:
+                  {onSelectMeal:any, title: boolean, duration: string, complexity: string, affordability: string, image:string}) => {
     return (
         <View style={styles.mealItem}>
         <TouchableOpacity onPress={onSelectMeal} >

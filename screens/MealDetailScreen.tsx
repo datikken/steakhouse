@@ -17,7 +17,7 @@ MealDetailScreen.navigationOptions = (navData) => {
     const selected = MEALS.find(meal => meal.id === mealId)
 
     return {
-        headerTitle: selected.title,
+        headerTitle: selected ? selected.title : 'title',
         headerRight: () =>
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
