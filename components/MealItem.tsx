@@ -19,11 +19,19 @@ const MealItem = ({onSelectMeal, title, duration, complexity, affordability, ima
                 <View style={{...styles.mealRow, ...styles.mealHeader}}>
                     <ImageBackground source={{uri: image}} style={styles.bgImage}>
                         <View style={styles.titleContainer}>
-                            <DefaultText text={title} />
+                            <DefaultText style={styles.title}>
+                                {title}
+                            </DefaultText>
                             <View style={styles.row}>
-                                <DefaultText text={duration} />
-                                <DefaultText text={complexity} />
-                                <DefaultText text={affordability} />
+                                <DefaultText style={styles.desc}>
+                                    {duration}
+                                </DefaultText>
+                                <DefaultText style={styles.desc}>
+                                    {complexity}
+                                </DefaultText>
+                                <DefaultText style={styles.desc}>
+                                    {affordability}
+                                </DefaultText>
                             </View>
                         </View>
                     </ImageBackground>
@@ -36,8 +44,15 @@ const MealItem = ({onSelectMeal, title, duration, complexity, affordability, ima
 };
 
 const styles = StyleSheet.create({
+    desc: {
+        color: 'white',
+        textAlign: 'center',
+        marginLeft: 12
+    },
     row: {
-        flexDirection: 'row'
+        margin: 5,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     },
     titleContainer: {
         backgroundColor: 'rgba(0,0,0, .5)',
