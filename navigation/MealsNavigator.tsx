@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CategoryMealsScreen from '../screens/CategoryMealsScreen';
@@ -13,6 +13,11 @@ import FavouritesScreen from "../screens/FavouritesScreen";
 import FiltersScreen from '../screens/FiltersScreen';
 import colors from "../constants/colors";
 
+const styles = StyleSheet.create({
+    ionicons: {
+        paddingTop: 5
+    }
+});
 //настройки по умолчанию
 const defaultOpts = {
     defaultNavigationOptions: {
@@ -50,7 +55,7 @@ const tabScreenConfig = {
         navigationOptions: {
             tabBarIcon: tabInfo => {
                 return (
-                    <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} />
+                    <Ionicons name="ios-restaurant" size={25} color={tabInfo.tintColor} style={styles.ionicons} />
                 );
             },
             tabBarColor: colors.primaryColor
@@ -60,7 +65,7 @@ const tabScreenConfig = {
         screen: FavouritesNavigator,
         navigationOptions: {
             tabBarIcon: tabInfo => {
-                return <Ionicons name="ios-heart-empty" size={25} color={tabInfo.tintColor} />;
+                return <Ionicons name="ios-heart-empty" size={25} color={tabInfo.tintColor} style={styles.ionicons} />;
             },
             tabBarColor: colors.accentColor
         }
@@ -78,7 +83,11 @@ const MealsFavTabNavigator =
         })
         : createBottomTabNavigator(tabScreenConfig, {
             tabBarOptions: {
-                activeTintColor: colors.accentColor
+                activeTintColor: colors.accentColor,
+                labelStyle: {
+                    fontFamily: 'meat',
+                    fontSize: 20
+                }
             }
         });
 //путь для фильтров

@@ -6,21 +6,22 @@ import {
     TouchableOpacity,
     ImageBackground
 } from 'react-native';
+import DefaultText from '../components/DefaultText';
 
 const MealItem = ({onSelectMeal, title, duration, complexity, affordability, image}:
-                  {onSelectMeal:any, title: boolean, duration: string, complexity: string, affordability: string, image:string}) => {
+                  {onSelectMeal:any, title: string, duration: string, complexity: string, affordability: string, image:string}) => {
     return (
         <View style={styles.mealItem}>
         <TouchableOpacity onPress={onSelectMeal} >
             <View>
                 <View style={{...styles.mealRow, ...styles.mealHeader}}>
-                    <ImageBackground source={{uri: image}} style={styles.bgImage} imageStyle={{ borderRadius: 20 }}>
+                    <ImageBackground source={{uri: image}} style={styles.bgImage}>
                         <View style={styles.titleContainer}>
-                            <Text style={styles.heading}>{title}</Text>
+                            <DefaultText text={title} />
                             <View style={styles.row}>
-                                <Text style={styles.title}>{duration}'m</Text>
-                                <Text style={styles.title}>{complexity}</Text>
-                                <Text style={styles.title}>{affordability}</Text>
+                                <DefaultText text={duration} />
+                                <DefaultText text={complexity} />
+                                <DefaultText text={affordability} />
                             </View>
                         </View>
                     </ImageBackground>
@@ -40,9 +41,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0, .5)',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        justifyContent: 'space-around',
-        borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 20
+        justifyContent: 'space-around'
     },
     heading: {
         fontSize: 20,
@@ -59,23 +58,15 @@ const styles = StyleSheet.create({
     bgImage: {
         height: '100%',
         width: '100%',
-        borderRadius: 20,
         justifyContent: 'flex-end'
     },
     mealItem: {
         height: 300,
         backgroundColor: '#f5f5f5',
-        margin: 15,
-        borderRadius: 20
+        margin: 15
     },
     mealRow: {
-        flexDirection: 'row',
-        borderRadius: 10,
-        shadowColor: 'black',
-        shadowOpacity: .5,
-        shadowOffset: {width:10,height:10},
-        shadowRadius: 10,
-        elevation: 3
+        flexDirection: 'row'
     },
     mealHeader: {
         height: '100%'

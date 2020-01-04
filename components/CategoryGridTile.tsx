@@ -23,13 +23,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderColor: 'black',
-        shadowOpacity: .26,
-        shadowOffset: {width:0,height:2},
-        borderRadius: 10,
-        shadowRadius: 10,
-        elevation: 3
+        justifyContent: 'center'
     },
     gridItem: {
         flex: 1,
