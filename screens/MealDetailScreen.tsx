@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 import DetailItem from '../components/DetailItem';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton'
-import {useSelector} from 'react-redux';
+//
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleFavourite } from '../store/actions/meals';
 
 const MealDetailScreen = props => {
     const mealId = props.navigation.getParam('mealId')
-    const allMeals = useSelector(state => state.meals.meals );
+    const allMeals = useSelector(state => state.meals.meals )
+
+    const selectedMeal = allMeals.find(meal => meal.id === mealId)
+
+    const dispatch = useDispatch()
+
+    const toggleFavHandler = useCallback(() => {
+        dispatch(toggleFavourite(mealId))
+    }, [dispatch, mealId])
+
+    useEffect(() => {
+        props.navigation.setParams({ toggleFav: toggleFavHandler })
+    }, [toggleFavHandler])
 
     const selected = allMeals.find(meal => meal.id === mealId)
 
@@ -16,6 +30,7 @@ const MealDetailScreen = props => {
 
 MealDetailScreen.navigationOptions = (navData) => {
     const mealTitle = navData.navigation.getParam('mealTitle');
+    const toggleFavourite = navData.navigation.getParam('toggleFav');
 
     return {
         headerTitle: mealTitle,
@@ -24,9 +39,7 @@ MealDetailScreen.navigationOptions = (navData) => {
                 <Item
                     title="Favourite"
                     iconName='ios-heart-empty'
-                    onPress={() => {
-                    console.log('Mark as favourite.')}
-                }/>
+                    onPress={toggleFavourite} />
             </HeaderButtons>
     }
 }
