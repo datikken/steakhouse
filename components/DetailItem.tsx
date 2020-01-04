@@ -2,14 +2,24 @@ import React from 'react';
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    ScrollView
 } from 'react-native';
 
-const DetailItem = (details) => {
+const DetailItem = ({details}) => {
     return (
-        <View>
-            <Text style={styles.heading}>{details.details.steps}</Text>
-        </View>
+        <ScrollView>
+            <View>
+                <Text style={styles.heading}>{details.steps}</Text>
+                <View style={styles.column}>
+                    {details.ingredients.map(item => (
+                       <Text
+                           style={styles.text}
+                           key={item}>{item}</Text>
+                    ))}
+                </View>
+            </View>
+        </ScrollView>
     )
 };
 
@@ -17,6 +27,13 @@ const styles = StyleSheet.create({
     heading: {
         color: 'black',
         padding: 20
+    },
+    column: {
+        flexDirection: 'column',
+        padding: 20
+    },
+    text: {
+        marginBottom: 5
     }
 });
 
