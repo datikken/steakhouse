@@ -87,9 +87,19 @@ const FilterNavigator = createStackNavigator({
 }, defaultOpts);
 
 //боковое меню
+const drawerOptions = {
+    contentOptions: {
+        activeTintColor: colors.accentColor,
+        labelStyle: {
+            fontFamily: 'meat',
+            fontSize: 40
+        }
+    }
+};
+
 const MainNavigator = createDrawerNavigator({
-  Favourites: MealsFavTabNavigator,
-  Filters: FilterNavigator
-});
+    Favourites: MealsFavTabNavigator,
+    Filters: FilterNavigator
+}, drawerOptions);
 
 export default createAppContainer(MainNavigator);
