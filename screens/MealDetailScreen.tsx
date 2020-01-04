@@ -10,8 +10,8 @@ import { toggleFavourite } from '../store/actions/meals';
 const MealDetailScreen = props => {
     const mealId = props.navigation.getParam('mealId')
     const allMeals = useSelector(state => state.meals.meals )
-
     const selectedMeal = allMeals.find(meal => meal.id === mealId)
+    const isFavouriteMeal = useSelector(state => state.meals.favouriteMeals.some(el => el.id === mealId));
 
     const dispatch = useDispatch()
 
@@ -20,8 +20,8 @@ const MealDetailScreen = props => {
     }, [dispatch, mealId])
 
     useEffect(() => {
-        props.navigation.setParams({ toggleFav: toggleFavHandler })
-    }, [toggleFavHandler])
+        props.navigation.setParams({ toggleFav: toggleFavHandler, isFav: isFavouriteMeal })
+    }, [toggleFavHandler, isFavouriteMeal])
 
     const selected = allMeals.find(meal => meal.id === mealId)
 
@@ -32,13 +32,16 @@ MealDetailScreen.navigationOptions = (navData) => {
     const mealTitle = navData.navigation.getParam('mealTitle');
     const toggleFavourite = navData.navigation.getParam('toggleFav');
 
+    const isFav = navData.navigation.getParam('isFav');
+    let icon = isFav ? 'ios-heart' : 'ios-heart-empty';
+
     return {
         headerTitle: mealTitle,
         headerRight: () =>
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
                     title="Favourite"
-                    iconName='ios-heart-empty'
+                    iconName={icon}
                     onPress={toggleFavourite} />
             </HeaderButtons>
     }
