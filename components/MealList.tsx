@@ -12,6 +12,7 @@ const MealList = ({displayed, navigation}) => {
                     title={item.title}
                     onSelectMeal={() => {
                         navigation.navigate({routeName: 'MealDetail', params: {
+                                mealTitle: item.title,
                                 mealId: item.id
                             } })
             }} />

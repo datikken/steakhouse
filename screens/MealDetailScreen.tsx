@@ -1,23 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import DetailItem from '../components/DetailItem';
-import { MEALS } from "../data/dummy-data";
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton'
+import {useSelector} from 'react-redux';
 
 const MealDetailScreen = props => {
     const mealId = props.navigation.getParam('mealId')
-    const selected = MEALS.find(meal => meal.id === mealId)
+    const allMeals = useSelector(state => state.meals.meals );
+
+    const selected = allMeals.find(meal => meal.id === mealId)
 
     return <DetailItem details={selected}/>
 };
 
 MealDetailScreen.navigationOptions = (navData) => {
-    const mealId = navData.navigation.getParam('mealId')
-    const selected = MEALS.find(meal => meal.id === mealId)
+    const mealTitle = navData.navigation.getParam('mealTitle');
 
     return {
-        headerTitle: selected ? selected.title : 'title',
+        headerTitle: mealTitle,
         headerRight: () =>
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item
