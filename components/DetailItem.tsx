@@ -11,9 +11,6 @@ import {
 const w = Dimensions.get('window');
 
 const DetailItem = ({details}) => {
-
-    console.log(details)
-
     return (
         <ScrollView>
             <View>
@@ -23,7 +20,6 @@ const DetailItem = ({details}) => {
                     style={{ width: w.width, height: w.width }}
                     resizeMode="cover"
                 />
-                <Text style={styles.heading}>{details.steps}</Text>
                 <View style={styles.column}>
                     {details.ingredients.map(item => (
                        <Text
@@ -31,6 +27,7 @@ const DetailItem = ({details}) => {
                            key={item}>{item}</Text>
                     ))}
                 </View>
+                <Text style={styles.heading}>{details.steps}</Text>
             </View>
         </ScrollView>
     )
@@ -39,14 +36,12 @@ const DetailItem = ({details}) => {
 const styles = StyleSheet.create({
     heading: {
         color: 'black',
-        padding: 20
+        padding: 20,
+        paddingBottom: 0
     },
     column: {
         flexDirection: 'column',
         padding: 20
-    },
-    text: {
-        marginBottom: 5
     }
 });
 

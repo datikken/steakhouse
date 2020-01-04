@@ -1,12 +1,14 @@
 import React from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     TouchableOpacity,
-    ImageBackground
+    ImageBackground,
+    Dimensions
 } from 'react-native';
 import DefaultText from '../components/DefaultText';
+
+const w = Dimensions.get('window');
 
 const MealItem = ({onSelectMeal, title, duration, complexity, affordability, image}:
                   {onSelectMeal:any, title: string, duration: string, complexity: string, affordability: string, image:string}) => {
